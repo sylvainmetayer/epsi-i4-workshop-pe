@@ -14,13 +14,12 @@
 <meta name="msapplication-config" content="/file/sitemodel/pefr/img/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 <link rel="shortcut icon" type="image/x-icon" href="https://www.pole-emploi.fr/accueil/file/site/favicon.ico" />
-<link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/bootstrap.css" />
+<!-- <link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/theme-pole-emploi.css" />
 <link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/theme-pole-emploi-devices.css" />
 <link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/owl.carousel.css" />
-<link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/home.css" />
+<link rel="stylesheet" type="text/css" href="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/css/home.css" /> -->
 <link rel="canonical" href="index.html" />
-<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/js/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.pole-emploi.fr/accueil/file/sitemodel/pefr/js/jquery.reject.js"></script>
 <script type="text/javascript">
@@ -61,18 +60,10 @@ var authConfiguration = {
 <script src="/accueil/file/sitemodel/pefr/js/respond.min.js"></script>
 <script src="/accueil/file/sitemodel/pefr/js/placeholder.js"></script>
 <![endif]-->
+<script src="clmtrackr.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body class="candidat home" onload="afficherCartoucheAuthentifie();">
-<!-- Début du tag DoubleClick Floodlight -->
-<script type="text/javascript">
-var axel = Math.random() + "";
-var a = axel * 10000000000000;
-document.write('<iframe src="https://4383660.fls.doubleclick.net/activityi;src=4383660;type=2016s0;cat=homep0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1;num=' + a + '" width="1" height="1" frameborder="0" style="display:none"></iframe>');
-</script>
-<noscript>
-<iframe src="https://4383660.fls.doubleclick.net/activityi;src=4383660;type=2016s0;cat=homep0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1;num=1" width="1" height="1" frameborder="0" style="display:none"></iframe>
-</noscript>
-<!-- Fin du tag DoubleClick Floodlight  -->
 <a href="index.html#PopinMenu" data-toggle="modal" data-target="#PopinMenu" class="skip-link sr-only sr-only-focusable">Accéder au menu</a>
 <a href="index.html#contents" class="skip-link sr-only sr-only-focusable">Accéder au contenu principal</a>
 <a href="index.html#footer" class="skip-link sr-only sr-only-focusable">Accéder au pied de page</a>
@@ -80,41 +71,6 @@ document.write('<iframe src="https://4383660.fls.doubleclick.net/activityi;src=4
 <span class="accessibility-off"><span class="icon-eye-close" aria-hidden="true"></span>Version contrastée</span>
 <span class="accessibility-on"><span class="icon-eye-full" aria-hidden="true"></span>Version standard</span>
 </button>
-<noscript>
-<div class="noscript" role="alert">
-<p>
-<strong> Le JavaScript semble être désactiv&eacute; sur votre navigateur. </strong><br>
-Javascript doit être activ&eacute; dans votre navigateur pour que vous puissiez utiliser les fonctionnalités de ce site internet.
-</p>
-</div>
-</noscript>
-<div style="display:none">
-<script type="text/javascript">
-var chemindefer ="[153]";
-var reg=new RegExp("[ ,]+", "g");
-var tableauchemindefer=chemindefer.split(reg);
-if (tableauchemindefer[1] == 92)
-{
-var google_tag_params = {
-Categorie: 'Accueil_Pole_emploi_RUB153'
-};
-}
-</script>
-<script type="text/javascript">
-/* <![CDATA[ */     
-var google_conversion_id =963904050;
-var google_custom_params ="window.google_tag_params";
-var google_remarketing_only ="true"; 
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/963904050/?value=0&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
-</div>
 <form id="formService" method="POST">
 <input type="hidden" name="jeton" value=""/>
 </form>
@@ -809,6 +765,13 @@ var indexs = ['01','02','03','04','05','06','07','08','09','10','11','12','13','
 <div class="container-fluid bg-news">
 <div class="container-fluid">
 HELLO
+
+<canvas id="drawCanvas" width="400" height="300"></canvas>
+
+
+<video id="inputVideo" width="400" height="300" autoplay loop>
+  <source src="./media/somevideo.ogv" type="video/ogg"/>
+</video>
 
 
 <form action="#" method="post">
