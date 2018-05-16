@@ -6,14 +6,6 @@ $(document).ready(function () {
     var vid_width = vid.width;
     var vid_height = vid.height;
 
-    $("#startbutton").on("click", startVideo);
-
-    function enablestart() {
-        var startbutton = document.getElementById('startbutton');
-        startbutton.value = "start";
-        startbutton.disabled = null;
-    }
-
     function gumSuccess(stream) {
         // add camera stream if getUserMedia succeeded
         if ("srcObject" in vid) {
@@ -31,7 +23,7 @@ $(document).ready(function () {
                 ctrack.start(vid);
             }
         }
-        // startVideo(); // AUTO START ?
+        startVideo(); // AUTO START ?
     }
 
     function gumFail() {
@@ -50,8 +42,6 @@ $(document).ready(function () {
         alert("This demo depends on getUserMedia, which your browser does not seem to support. :(");
     }
 
-    vid.addEventListener('canplay', enablestart, false);
-
     /*********** setup of emotion detection *************/
     // set eigenvector 9 and 11 to not be regularized. This is to better detect motion of the eyebrows
     pModel.shapeModel.nonRegularizedVectors.push(9);
@@ -65,7 +55,6 @@ $(document).ready(function () {
         vid.play();
         // start tracking
         ctrack.start(vid);
-
         trackingStarted = true;
         console.log("Going to track your emotions !");
         trackEmotions();
