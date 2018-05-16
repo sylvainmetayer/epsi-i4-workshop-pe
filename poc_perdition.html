@@ -12,16 +12,33 @@
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
 		<script src="js/modernizr.custom.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<style>
+			.foo {
+				color: red !important
+			}
+		</style>
+		<script>
+			$( document ).ready(function() {
+				// Gros menus
+				$(".cbp-hrmenu > ul > li > a ").each(function( index ) {
+					//$( this ).addClass( "foo" );
+				});
+
+				// Sub menu 
+				$(".cbp-hrmenu .cbp-hrsub-inner > div a").each(function( index ) {
+					$( this ).addClass( "foo" );
+				});
+
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container">
 			<header class="clearfix">
-				<span>Blueprint</span>
-				<h1>Horizontal Drop-Down Menu</h1>
-				<nav>
-					<a href="http://tympanus.net/Blueprints/FullWidthImageSlider/" class="icon-arrow-left" data-info="previous Blueprint">Previous Blueprint</a>
-					<a href="http://tympanus.net/codrops/?p=14426" class="icon-drop" data-info="back to the Codrops article">back to the Codrops article</a>
-				</nav>
+				<span>POC Detection du niveau de perte</span>
+				<h1>Une application</h1>
 			</header>	
 			<div class="main">
 				<nav id="cbp-hrmenu" class="cbp-hrmenu">
@@ -221,7 +238,6 @@
 				</nav>
 			</div>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="js/cbpHorizontalMenu.min.js"></script>
 		<script>
 			$(function() {
