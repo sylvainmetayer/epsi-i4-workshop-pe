@@ -21,14 +21,34 @@
 		</style>
 		<script>
 			$( document ).ready(function() {
+
+				var level = 100;
+
+				setInterval(function(){ 
+					if(level < 100)
+						level+=2
+
+					console.log(level)
+				 }, 3000);
+
 				// Gros menus
 				$(".cbp-hrmenu > ul > li > a ").each(function( index ) {
-					//$( this ).addClass( "foo" );
+					$( this ).click(
+						function(){
+							level-=10;
+							console.log(level)
+						}
+					 );
 				});
 
 				// Sub menu 
 				$(".cbp-hrmenu .cbp-hrsub-inner > div a").each(function( index ) {
-					$( this ).addClass( "foo" );
+					$( this ).click(
+						function(){
+							level-=5;
+							console.log(level)
+						}
+					 );
 				});
 
 			});
