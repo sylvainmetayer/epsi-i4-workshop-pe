@@ -45,6 +45,21 @@
             <input class="btn" type="button" value="wait, loading video" disabled="disabled" onclick="startVideo()" id="startbutton"></input>
         </div>
 
+        <ul>
+            <li>Angry
+                <span class="angry">0</span>
+            </li>
+            <li>Sad
+                <span class="sad">0</span>
+            </li>
+            <li>Happy
+                <span class="happy">0</span>
+            </li>
+            <li>Surprised
+                <span class="surprised">0</span>
+            </li>
+        </ul>
+
         <script type="application/javascript">
             var seeked_emotions = ["surprised", "angry", "sad", "happy"];
             var results = { "surprised": [0], "angry": [0], "sad": [0], "happy": [0] };
@@ -125,7 +140,6 @@
                             var user_emotion = er[i].emotion;
                             if (seeked_emotions.indexOf(user_emotion) >= -1) {
                                 results[user_emotion].push(er[i].value);
-                                console.log(er[i]);
                             }
 
                             Object.keys(results).forEach(function (key) {
@@ -133,11 +147,7 @@
                                     return acc + el;
                                 })
                                 var average = sum / results[key].length;
-                                if (average > 0.8) {
-                                    console.log("You are very " + key + " ! (" + average + ')');
-                                } else {
-                                    console.log(key + " avg: " + average);
-                                }
+                                document.getElementsByClassName(key)[0].innerHTML = average;
                             });
                         }
                     }
