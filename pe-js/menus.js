@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     function getLevel() {
-        return $("#paume").html()
+        return parseInt($("#paume").html());
     }
 
     function incrLevel(increment) {
@@ -11,7 +11,7 @@ $(document).ready(function () {
     }
 
     setInterval(function () {
-        if (PE_API.isUserDetected()) incrLevel(2)
+        if (PE_API.isUserDetected() && getLevel() <= 100) incrLevel(2)
     }, 3000);
 
     // Gros menus
