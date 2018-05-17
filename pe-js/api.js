@@ -12,7 +12,7 @@ var PE_API = {
             "angry": angry
         }
     },
-    ARRAY_MAX_LENGTH: 10,
+    ARRAY_MAX_LENGTH: 20,
     initAll: function () {
         var fill = function (nb) {
             var tmp = []
