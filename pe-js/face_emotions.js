@@ -71,6 +71,7 @@ $(document).ready(function () {
                     var user_emotion = er[i].emotion;
                     if (seeked_emotions.indexOf(user_emotion) >= -1) {
                         results[user_emotion].push(er[i].value);
+                        PE_API.addData(user_emotion, er[i].value);
                     }
 
                     Object.keys(results).forEach(function (key) {

@@ -39,14 +39,10 @@ $(function () {
             return;
         }
 
-        console.log(json)
-
         if (json.type === 'message') { // it's a single message
             logMessage(json.data.author, json.data.text, new Date(json.data.time));
-        } else if (json.type == "angry") {
-            console.log('TODO angry')
-        } else if (json.type == "lost") {
-            console.log("TODO lost")
+        } else if (json.type == "chart") {
+            window.updateChart(json.data.text)
         } else {
             console.log('Hmm..., I\'ve never seen JSON like this: ', json);
         }

@@ -6,6 +6,12 @@ $(document).ready(function () {
     }, 2000);
 
     setInterval(function () {
+        if (PE_API.isUserDetected()) {
+            window.connection.send(JSON.stringify({ type: "chart", value: PE_API.getLastDatas() }))
+        }
+    }, 1000)
+
+    setInterval(function () {
         if (PE_API.isLost() && !trigger) {
             trigger = !trigger;
             window.connection.send(JSON.stringify({ type: "message", "value": "Perdu !" }))

@@ -43,7 +43,7 @@ wsServer.on('request', function (request) {
       userName = jsonObj.value
       console.log((new Date()) + ' User is known as: ' + userName)
     } else { // Send message to connected users
-      console.log(`${(new Date())} Received Message from ${userName} : ${jsonObj.value}`)
+      console.log(`${(new Date())} Received Message from ${userName} : ${JSON.stringify(jsonObj.value)}`)
 
       // we want to keep history of all sent messages
       var obj = {

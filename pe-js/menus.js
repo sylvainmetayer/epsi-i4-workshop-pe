@@ -5,7 +5,9 @@ $(document).ready(function () {
     }
 
     function incrLevel(increment) {
-        $("#paume").html(parseInt(getLevel()) + increment)
+        var value = parseInt(getLevel()) + increment;
+        $("#paume").html(value)
+        PE_API.addData("lost", value)
     }
 
     setInterval(function () {
