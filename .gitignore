@@ -1,3 +1,4 @@
 .vscode/
 node_modules/
 pe-js/config.js
+app/config.js

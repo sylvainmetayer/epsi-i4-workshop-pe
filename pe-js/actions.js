@@ -1,11 +1,7 @@
 $(document).ready(function () {
 
-    // If you want to stop trigger, set this to true
+    // If you want to stop sending events, set this to true
     var trigger = false;
-
-    setTimeout(function () {
-        window.connection.send(JSON.stringify({ type: "message", "value": "connecté" }))
-    }, 2000);
 
     setInterval(function () {
         if (PE_API.isUserDetected()) {
@@ -15,13 +11,13 @@ $(document).ready(function () {
 
     setInterval(function () {
         if (PE_API.isLost() && !trigger) {
-            window.connection.send(JSON.stringify({ type: "message", "value": "perdu" }))
+            window.connection.send(JSON.stringify({ type: "message", value: "perdu(e)" }))
             $("#status").html("Vous êtes perdu !");
         }
 
         if (PE_API.isAngry() && !trigger) {
-            window.connection.send(JSON.stringify({ type: "message", "value": "énervé" }))
-            $("#status").html("Vous êtes énervé, une hotesse va venir vous prendre en charge");
+            window.connection.send(JSON.stringify({ type: "message", value: "énervé(e)" }))
+            $("#status").html("Vous êtes énervé !");
         }
 
         // Whatever you want !

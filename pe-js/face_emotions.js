@@ -26,7 +26,7 @@ $(document).ready(function () {
     }
 
     function gumFail() {
-        alert("There was some problem trying to fetch video from your webcam. If you have a webcam, please make sure to accept when the browser asks for access to your webcam.");
+        console.log("There was some problem trying to fetch video from your webcam. If you have a webcam, please make sure to accept when the browser asks for access to your webcam.");
     }
 
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -38,7 +38,7 @@ $(document).ready(function () {
     } else if (navigator.getUserMedia) {
         navigator.getUserMedia({ video: true }, gumSuccess, gumFail);
     } else {
-        alert("This demo depends on getUserMedia, which your browser does not seem to support. :(");
+        console.log("This demo depends on getUserMedia, which your browser does not seem to support. :(");
     }
 
     /*********** setup of emotion detection *************/
@@ -50,9 +50,7 @@ $(document).ready(function () {
     var trackingStarted = false;
 
     function startVideo() {
-        // start video
         vid.play();
-        // start tracking
         ctrack.start(vid);
         trackingStarted = true;
         trackEmotions();
@@ -78,7 +76,9 @@ $(document).ready(function () {
 
     delete emotionModel['disgusted'];
     delete emotionModel['fear'];
+    delete emotionModel["sad"];
+    delete emotionModel["happy"];
+    delete emotionModel["surprised"];
     var ec = new emotionClassifier();
     ec.init(emotionModel);
-    var emotionData = ec.getBlank();
 });

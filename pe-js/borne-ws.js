@@ -7,7 +7,7 @@ $(function () {
         return;
     }
 
-    var connection = new WebSocket(WS_URL);
+    var connection = new WebSocket(WS_URL, 'echo-protocol');
     var timerId = 0;
 
     function init() {
@@ -22,7 +22,7 @@ $(function () {
 
         timerId = setInterval(function () {
             if (connection.readyState !== 1) {
-                connection = new WebSocket(WS_URL);
+                connection = new WebSocket(WS_URL, 'echo-protocol');
                 clearInterval(timerId);
                 init();
             }
@@ -32,6 +32,4 @@ $(function () {
     }
 
     init();
-
-
 });

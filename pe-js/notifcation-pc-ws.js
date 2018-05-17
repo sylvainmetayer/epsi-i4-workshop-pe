@@ -22,7 +22,7 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket(WS_URL);
+    var connection = new WebSocket(WS_URL, 'echo-protocol');
     var timerId = 0;
 
     function init() {
@@ -62,7 +62,7 @@ $(function () {
 
         timerId = setInterval(function () {
             if (connection.readyState !== 1) {
-                connection = new WebSocket(WS_URL);
+                connection = new WebSocket(WS_URL, 'echo-protocol');
                 clearInterval(timerId);
                 init();
             }
@@ -72,7 +72,7 @@ $(function () {
     init();
 
     function logMessage(author, message, dt) {
-        content.prepend(`<li>La ${author} est ${message} à  `
+        content.prepend(`<li>${author} est ${message} à  `
             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
             + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
             + ':' + (dt.getSeconds() < 10 ? '0' + dt.getSeconds() : dt.getSeconds()) + '</li>');
