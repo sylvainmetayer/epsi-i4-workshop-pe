@@ -4,7 +4,7 @@ $(document).ready(function () {
     var trigger = false;
 
     setTimeout(function () {
-        window.connection.send(JSON.stringify({ type: "message", "value": "Connecté !" }))
+        window.connection.send(JSON.stringify({ type: "message", "value": "connecté" }))
     }, 2000);
 
     setInterval(function () {
@@ -15,21 +15,13 @@ $(document).ready(function () {
 
     setInterval(function () {
         if (PE_API.isLost() && !trigger) {
-            //trigger = !trigger;
-            window.connection.send(JSON.stringify({ type: "message", "value": "Perdu !" }))
+            window.connection.send(JSON.stringify({ type: "message", "value": "perdu" }))
             $("#status").html("Vous êtes perdu !");
         }
 
         if (PE_API.isAngry() && !trigger) {
-            //trigger = !trigger;
-            window.connection.send(JSON.stringify({ type: "message", "value": "Enervé !" }))
+            window.connection.send(JSON.stringify({ type: "message", "value": "énervé" }))
             $("#status").html("Vous êtes énervé, une hotesse va venir vous prendre en charge");
-        }
-
-        if (PE_API.isSurprised() && !trigger) {
-            //trigger = !trigger;
-            window.connection.send(JSON.stringify({ type: "message", "value": "Surpris !" }))
-            $("#status").html('Vous semblez surpris, avez-vous besoin d\'aide ?');
         }
 
         // Whatever you want !

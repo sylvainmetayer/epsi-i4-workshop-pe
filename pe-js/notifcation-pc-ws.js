@@ -3,7 +3,6 @@ $(function () {
 
     // for better performance - to avoid searching in DOM
     var content = $('#notifications');
-
     var pause = false;
 
     $("#pause").on("click", function () {
@@ -15,70 +14,68 @@ $(function () {
         }
     })
 
-    // if user is running mozilla then use it's built-in WebSocket
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-    // if browser doesn't support WebSocket, just show some notification and exit
     if (!window.WebSocket) {
-        content.prepend($('<li>', {
-            text: 'Sorry, but your browser doesn\'t '
-                + 'support WebSockets.'
-        }));
+        console.log('No WS support');
         return;
     }
 
-
-
     // open connection
     var connection = new WebSocket(WS_URL);
+    var timerId = 0;
 
-    connection.onopen = function () {
-        connection.send(JSON.stringify({ type: "name", value: "Poste de contrôle" }));
-    };
+    function init() {
 
-    connection.onerror = function (error) {
-        // just in there were some problems with connection...
-        content.prepend($('<li>', {
-            text: 'Sorry, but there\'s some problem with your '
-                + 'connection or the server is down.'
-        }));
-    };
+        console.log((new Date()) + ' (re)connection...')
 
-    connection.onmessage = function (message) {
-        try {
-            var json = JSON.parse(message.data);
-        } catch (e) {
-            console.log('This doesn\'t look like a valid JSON: ', message.data);
-            return;
-        }
+        connection.onopen = function () {
+            connection.send(JSON.stringify({ type: "name", value: "Poste de contrôle" }));
+        };
 
-        if (json.type === 'message' && !pause) { // it's a single message
-            logMessage(json.data.author, json.data.text, new Date(json.data.time));
-        } else if (json.type == "chart" && !pause) {
-            window.updateChart(json.data.text)
-        } else {
-            if (!pause) {
-                console.log(json);
+        connection.onerror = function (error) {
+            // just in there were some problems with connection...
+            content.prepend($('<li>', {
+                text: 'Sorry, but there\'s some problem with your '
+                    + 'connection or the server is down.'
+            }));
+        };
+
+        connection.onmessage = function (message) {
+            try {
+                var json = JSON.parse(message.data);
+            } catch (e) {
+                console.log('This doesn\'t look like a valid JSON: ', message.data);
+                return;
             }
-        }
-    };
 
-    /**
-     * This method is optional. If the server wasn't able to respond to the
-     * in 3 seconds then show some error message to notify the user that
-     * something is wrong.
-     */
-    var timerId = setInterval(function () {
-        if (connection.readyState !== 1) {
-            content.prepend($('<li>', { text: 'Unable to communicate with the WebSocket server.' }));
-            clearInterval(timerId);
-        }
-    }, 5000);
+            if (json.type === 'message' && !pause) { // it's a single message
+                logMessage(json.data.author, json.data.text, new Date(json.data.time));
+            } else if (json.type == "chart" && !pause) {
+                window.updateChart(json.data.text)
+            } else {
+                if (!pause) {
+                    console.log(json);
+                }
+            }
+        };
+
+        timerId = setInterval(function () {
+            if (connection.readyState !== 1) {
+                connection = new WebSocket(WS_URL);
+                clearInterval(timerId);
+                init();
+            }
+        }, 5000);
+    }
+
+    init();
 
     function logMessage(author, message, dt) {
-        content.prepend('<li>' + author + ' @ ' +
+        content.prepend(`<li>La ${author} est ${message} à  `
             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
             + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
-            + ': ' + message + '</p>');
+            + ':' + (dt.getSeconds() < 10 ? '0' + dt.getSeconds() : dt.getSeconds()) + '</li>');
+        $('#notifications > li').slice(5, -1).remove();
     }
 });

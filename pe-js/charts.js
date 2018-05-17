@@ -2,9 +2,7 @@ window.onload = function () {
 
     var angryData = [];
     var lostData = [];
-    var happyData = [];
-    var sadData = [];
-    var surprisedData = [];
+
     var chart = new CanvasJS.Chart("chartContainer", {
         title: {
             text: "Suivi de l'utilisateur"
@@ -43,33 +41,6 @@ window.onload = function () {
             yValueFormatString: "#'%'",
             xValueFormatString: " "
         },
-        {
-            type: "line",
-            name: "Joie",
-            showInLegend: true,
-            dataPoints: happyData,
-            markerSize: 0,
-            yValueFormatString: "#'%'",
-            xValueFormatString: " "
-        },
-        {
-            type: "line",
-            name: "Tristesse",
-            showInLegend: true,
-            dataPoints: sadData,
-            markerSize: 0,
-            yValueFormatString: "#'%'",
-            xValueFormatString: " "
-        },
-        {
-            type: "line",
-            name: "Surprise",
-            showInLegend: true,
-            dataPoints: surprisedData,
-            markerSize: 0,
-            yValueFormatString: "#'%'",
-            xValueFormatString: " "
-        }
         ]
     });
 
@@ -79,9 +50,6 @@ window.onload = function () {
 
     window.updateChart = function (values) {
         update(angryData, values.angry * 100)
-        update(sadData, values.sad * 100)
-        update(happyData, values.happy * 100)
-        update(surprisedData, values.surprised * 100)
         update(lostData, values.lost)
         xVal++;
     };

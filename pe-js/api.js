@@ -1,14 +1,7 @@
 var PE_API = {
     getFacialEmotions: function () {
         var angry = document.getElementById("angry").innerHTML;
-        var happy = document.getElementById("happy").innerHTML;
-        var surprised = document.getElementById("surprised").innerHTML;
-        var sad = document.getElementById('sad').innerHTML;
-
         return {
-            "sad": sad,
-            "happy": happy,
-            "surprised": surprised,
             "angry": angry
         }
     },
@@ -23,10 +16,7 @@ var PE_API = {
         }
         this.datas = {
             lost: [],
-            angry: fill(this.ARRAY_MAX_LENGTH),
-            happy: fill(this.ARRAY_MAX_LENGTH),
-            sad: fill(this.ARRAY_MAX_LENGTH),
-            surprised: fill(this.ARRAY_MAX_LENGTH),
+            angry: fill(this.ARRAY_MAX_LENGTH)
         }
     },
     datas: {},
@@ -44,7 +34,7 @@ var PE_API = {
     },
     getLastDatas: function () {
         var result = {}
-        var elements = ["sad", "happy", "surprised", "angry", "lost"];
+        var elements = ["angry", "lost"];
         for (var i = 0; i < elements.length; i++) {
             result[elements[i]] = this.getLastData(elements[i])
             if (result[elements[i]] === undefined) {
@@ -63,12 +53,9 @@ var PE_API = {
     isAngry: function () {
         return this.avg("angry") > 0.6
     },
-    isSurprised: function () {
-        return this.avg("surprised") > 0.8;
-    },
     isUserDetected: function () {
         var emotions = this.getFacialEmotions();
-        return !(emotions["sad"] == 0 && emotions["happy"] == 0 && emotions["surprised"] == 0 && emotions["angry"] == 0);
+        return !(emotions["angry"] == 0);
     },
     isLost: function () {
         return document.getElementById("paume").innerHTML < 40

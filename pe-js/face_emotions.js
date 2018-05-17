@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var seeked_emotions = ["surprised", "angry", "sad", "happy"];
+    var seeked_emotions = ["angry"];
 
     var vid = document.getElementById('videoel');
     var vid_width = vid.width;
@@ -55,8 +55,6 @@ $(document).ready(function () {
         // start tracking
         ctrack.start(vid);
         trackingStarted = true;
-        console.log("Going to track your emotions !");
-        window.connection.send(JSON.stringify({ type: "message", value: "Emotion detection started" }));
         trackEmotions();
     }
 
@@ -66,15 +64,13 @@ $(document).ready(function () {
         var er = ec.meanPredict(cp);
         if (er) {
             for (var i = 0; i < er.length; i++) {
-                if (er[i].value > 0.4) {
-                    var user_emotion = er[i].emotion;
-                    if (seeked_emotions.indexOf(user_emotion) >= -1) {
-                        PE_API.addData(user_emotion, er[i].value);
-                    }
+                var user_emotion = er[i].emotion;
+                if (seeked_emotions.indexOf(user_emotion) != -1) {
+                    PE_API.addData(user_emotion, er[i].value);
+                }
 
-                    for (var j = 0; j < seeked_emotions.length; j++) {
-                        $("#" + seeked_emotions[j]).html(PE_API.avg(seeked_emotions[j]));
-                    }
+                for (var j = 0; j < seeked_emotions.length; j++) {
+                    $("#" + seeked_emotions[j]).html(PE_API.avg(seeked_emotions[j]));
                 }
             }
         }
