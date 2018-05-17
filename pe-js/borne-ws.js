@@ -5,7 +5,7 @@ $(function () {
 
     // if browser doesn't support WebSocket, just show some notification and exit
     if (!window.WebSocket) {
-        alert('No WS support');
+        console.log('No WS support');
         return;
     }
 
@@ -16,7 +16,7 @@ $(function () {
     };
 
     connection.onerror = function (error) {
-        alert('Error !')
+        console.log('Server unavailable')
     };
 
     window.connection = connection;
