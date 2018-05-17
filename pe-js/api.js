@@ -13,7 +13,7 @@ var PE_API = {
         }
     },
     ARRAY_MAX_LENGTH: 20,
-    initAll: function () {
+    init: function () {
         var fill = function (nb) {
             var tmp = []
             for (var i = 0; i < nb; i++) {
@@ -61,10 +61,10 @@ var PE_API = {
         return avg;
     },
     isAngry: function () {
-        return (this.avg("angry") > 0.6)
+        return this.avg("angry") > 0.6
     },
     isSurprised: function () {
-        return this.avg("surprised") > 0.6;
+        return this.avg("surprised") > 0.8;
     },
     isUserDetected: function () {
         var emotions = this.getFacialEmotions();
@@ -75,6 +75,4 @@ var PE_API = {
     }
 }
 
-PE_API.initAll()
-
-console.log(PE_API.datas)
+PE_API.init()

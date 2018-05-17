@@ -1,13 +1,13 @@
 window.onload = function () {
 
-    var angryData = []; // dataPoints
-    var lostData = []; // dataPoints
-    var happyData = []; // dataPoints
-    var sadData = []; // dataPoints
-    var surprisedData = []; // dataPoints
+    var angryData = [];
+    var lostData = [];
+    var happyData = [];
+    var sadData = [];
+    var surprisedData = [];
     var chart = new CanvasJS.Chart("chartContainer", {
         title: {
-            text: "Monitoring"
+            text: "Suivi de l'utilisateur"
         },
         legend: {
             cursor: "pointer",
@@ -28,7 +28,7 @@ window.onload = function () {
         },
         data: [{
             type: "line",
-            name: "Angry",
+            name: "Enervement",
             showInLegend: true,
             dataPoints: angryData,
             markerSize: 0,
@@ -36,7 +36,7 @@ window.onload = function () {
             xValueFormatString: " "
         }, {
             type: "line",
-            name: "Lost",
+            name: "Confiance de l'utilisateur",
             showInLegend: true,
             dataPoints: lostData,
             markerSize: 0,
@@ -45,7 +45,7 @@ window.onload = function () {
         },
         {
             type: "line",
-            name: "Happy",
+            name: "Joie",
             showInLegend: true,
             dataPoints: happyData,
             markerSize: 0,
@@ -54,7 +54,7 @@ window.onload = function () {
         },
         {
             type: "line",
-            name: "Sad",
+            name: "Tristesse",
             showInLegend: true,
             dataPoints: sadData,
             markerSize: 0,
@@ -63,7 +63,7 @@ window.onload = function () {
         },
         {
             type: "line",
-            name: "Surprised",
+            name: "Surprise",
             showInLegend: true,
             dataPoints: surprisedData,
             markerSize: 0,

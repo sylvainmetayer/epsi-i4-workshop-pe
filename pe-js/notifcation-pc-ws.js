@@ -24,7 +24,7 @@ $(function () {
     };
 
     connection.onerror = function (error) {
-        // just in there were some problems with conenction...
+        // just in there were some problems with connection...
         content.prepend($('<li>', {
             text: 'Sorry, but there\'s some problem with your '
                 + 'connection or the server is down.'

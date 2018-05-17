@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
+    // If you want to stop trigger, set this to true
     var trigger = false;
+
     setTimeout(function () {
         window.connection.send(JSON.stringify({ type: "message", "value": "Connecté !" }))
     }, 2000);
