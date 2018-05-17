@@ -78,14 +78,11 @@ window.onload = function () {
     var dataLength = 100; // number of dataPoints visible at any point
 
     window.updateChart = function (values) {
-
-        console.log(values)
         update(angryData, values.angry * 100)
         update(sadData, values.sad * 100)
         update(happyData, values.happy * 100)
         update(surprisedData, values.surprised * 100)
         update(lostData, values.lost)
-
         xVal++;
     };
 

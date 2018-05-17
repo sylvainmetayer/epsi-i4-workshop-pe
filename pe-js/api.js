@@ -1,11 +1,4 @@
 var PE_API = {
-    datas: {
-        lost: [],
-        angry: [],
-        happy: [],
-        sad: [],
-        surprised: [],
-    },
     getFacialEmotions: function () {
         var angry = document.getElementById("angry").innerHTML;
         var happy = document.getElementById("happy").innerHTML;
@@ -19,8 +12,29 @@ var PE_API = {
             "angry": angry
         }
     },
+    ARRAY_MAX_LENGTH: 10,
+    initAll: function () {
+        var fill = function (nb) {
+            var tmp = []
+            for (var i = 0; i < nb; i++) {
+                tmp[i] = 0.5
+            }
+            return tmp;
+        }
+        this.datas = {
+            lost: [],
+            angry: fill(this.ARRAY_MAX_LENGTH),
+            happy: fill(this.ARRAY_MAX_LENGTH),
+            sad: fill(this.ARRAY_MAX_LENGTH),
+            surprised: fill(this.ARRAY_MAX_LENGTH),
+        }
+    },
+    datas: {},
     addData: function (type, value) {
         this.datas[type].push(value);
+        if (this.datas[type].length > this.ARRAY_MAX_LENGTH) {
+            this.datas[type].shift();
+        }
     },
     getDatas: function (type) {
         return this.datas[type]
@@ -39,13 +53,18 @@ var PE_API = {
         }
         return result;
     },
+    avg: function (type) {
+        var total = this.datas[type].reduce(function (acc, el) {
+            return acc + el;
+        })
+        var avg = total / this.datas[type].length;
+        return avg;
+    },
     isAngry: function () {
-        var emotions = this.getFacialEmotions();
-        return (emotions["angry"] > 0.6)
+        return (this.avg("angry") > 0.6)
     },
     isSurprised: function () {
-        var emotions = this.getFacialEmotions();
-        return emotions["surprised"] > 0.6;
+        return this.avg("surprised") > 0.6;
     },
     isUserDetected: function () {
         var emotions = this.getFacialEmotions();
@@ -55,3 +74,7 @@ var PE_API = {
         return document.getElementById("paume").innerHTML < 40
     }
 }
+
+PE_API.initAll()
+
+console.log(PE_API.datas)

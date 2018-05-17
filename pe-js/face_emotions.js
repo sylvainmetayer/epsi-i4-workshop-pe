@@ -1,6 +1,5 @@
 $(document).ready(function () {
     var seeked_emotions = ["surprised", "angry", "sad", "happy"];
-    var results = { "surprised": [0], "angry": [0], "sad": [0], "happy": [0] };
 
     var vid = document.getElementById('videoel');
     var vid_width = vid.width;
@@ -70,18 +69,12 @@ $(document).ready(function () {
                 if (er[i].value > 0.4) {
                     var user_emotion = er[i].emotion;
                     if (seeked_emotions.indexOf(user_emotion) >= -1) {
-                        results[user_emotion].push(er[i].value);
                         PE_API.addData(user_emotion, er[i].value);
                     }
 
-                    Object.keys(results).forEach(function (key) {
-                        var sum = results[key].reduce(function (acc, el) {
-                            return acc + el;
-                        })
-                        var average = sum / results[key].length;
-                        $("#" + key).html(average);
-                    });
-
+                    for (var j = 0; j < seeked_emotions.length; j++) {
+                        $("#" + seeked_emotions[j]).html(PE_API.avg(seeked_emotions[j]));
+                    }
                 }
             }
         }
