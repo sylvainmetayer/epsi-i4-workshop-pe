@@ -4,6 +4,17 @@ $(function () {
     // for better performance - to avoid searching in DOM
     var content = $('#notifications');
 
+    var pause = false;
+
+    $("#pause").on("click", function () {
+        pause = !pause;
+        if (pause) {
+            $("#pause").val("Reprendre")
+        } else {
+            $("#pause").val("Pause")
+        }
+    })
+
     // if user is running mozilla then use it's built-in WebSocket
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
@@ -15,6 +26,8 @@ $(function () {
         }));
         return;
     }
+
+
 
     // open connection
     var connection = new WebSocket(WS_URL);
@@ -39,12 +52,14 @@ $(function () {
             return;
         }
 
-        if (json.type === 'message') { // it's a single message
+        if (json.type === 'message' && !pause) { // it's a single message
             logMessage(json.data.author, json.data.text, new Date(json.data.time));
-        } else if (json.type == "chart") {
+        } else if (json.type == "chart" && !pause) {
             window.updateChart(json.data.text)
         } else {
-            console.log('Hmm..., I\'ve never seen JSON like this: ', json);
+            if (!pause) {
+                console.log(json);
+            }
         }
     };
 
