@@ -8,6 +8,8 @@ L'objectif était de détecter la détresse de l'utilisateur (pour des personnes
 
 `npm install`
 
+`cp pe-js/config.js.sample pe-js/config.js` Edit value
+
 `npm start`
 
 `php -S localhost:8080`
