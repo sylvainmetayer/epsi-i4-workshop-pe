@@ -17,7 +17,7 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket('wss://epsi.sylvainmetayer.fr/ws');
+    var connection = new WebSocket(WS_URL);
 
     connection.onopen = function () {
         connection.send(JSON.stringify({ type: "name", value: "Poste de contrôle" }));
