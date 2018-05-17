@@ -4,6 +4,8 @@ $(document).ready(function () {
         return parseInt($("#paume").html());
     }
 
+    PE_API.addData("lost", getLevel());
+
     function incrLevel(increment) {
         var value = parseInt(getLevel()) + increment;
         $("#paume").html(value)
@@ -11,7 +13,7 @@ $(document).ready(function () {
     }
 
     setInterval(function () {
-        if (PE_API.isUserDetected() && getLevel() <= 100) incrLevel(2)
+        if (PE_API.isUserDetected() && getLevel() <= 98) incrLevel(2)
     }, 3000);
 
     // Gros menus

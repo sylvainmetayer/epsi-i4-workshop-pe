@@ -9,7 +9,7 @@ $(document).ready(function () {
         if (PE_API.isUserDetected()) {
             window.connection.send(JSON.stringify({ type: "chart", value: PE_API.getLastDatas() }))
         }
-    }, 1000)
+    }, 100)
 
     setInterval(function () {
         if (PE_API.isLost() && !trigger) {

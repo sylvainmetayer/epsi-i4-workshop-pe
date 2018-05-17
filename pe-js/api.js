@@ -52,6 +52,6 @@ var PE_API = {
         return !(emotions["sad"] == 0 && emotions["happy"] == 0 && emotions["surprised"] == 0 && emotions["angry"] == 0);
     },
     isLost: function () {
-        return document.getElementById("paume").innerHTML > 120 || document.getElementById("paume").innerHTML < 40
+        return document.getElementById("paume").innerHTML < 40
     }
 }
