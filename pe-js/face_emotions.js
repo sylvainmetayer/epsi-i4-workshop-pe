@@ -23,7 +23,7 @@ $(document).ready(function () {
                 ctrack.start(vid);
             }
         }
-        startVideo(); // AUTO START ?
+        startVideo();
     }
 
     function gumFail() {
@@ -57,6 +57,7 @@ $(document).ready(function () {
         ctrack.start(vid);
         trackingStarted = true;
         console.log("Going to track your emotions !");
+        window.connection.send(JSON.stringify({ type: "message", value: "Emotion detection started" }));
         trackEmotions();
     }
 

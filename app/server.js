@@ -4,20 +4,13 @@ var webSocketsServerPort = 1337
 var WebSocketServer = require('websocket').server
 var http = require('http')
 
-/**
- * Global variables
- */
-// latest 100 messages
-var history = []
 // list of currently connected clients (users)
 var clients = []
 
-/**
- * HTTP server
- */
 var server = http.createServer(function (request, response) {
   // Not important for us. We're writing WebSocket server, not HTTP server
 })
+
 server.listen(webSocketsServerPort, function () {
   console.log((new Date()) + ' Server is listening on port ' + webSocketsServerPort)
 })
@@ -43,30 +36,28 @@ wsServer.on('request', function (request) {
 
   console.log((new Date()) + ' Connection accepted.')
 
-  // user sent some message
   connection.on('message', function (message) {
-    if (message.type === 'utf8') { // accept only text
-      if (userName === false) { // first message sent by user is their name
-        userName = message.utf8Data
-        console.log((new Date()) + ' User is known as: ' + userName)
-      } else { // Send message to connected users
-        console.log((new Date()) + ' Received Message from ' +
-          userName + ': ' + message.utf8Data)
+    let jsonObj = JSON.parse(message.utf8Data)
 
-        // we want to keep history of all sent messages
-        var obj = {
-          time: (new Date()).getTime(),
-          text: message.utf8Data,
-          author: userName
-        }
-        history.push(obj)
-        history = history.slice(-100)
+    if (jsonObj.type === 'name' && userName === false) {
+      userName = jsonObj.value
+      console.log((new Date()) + ' User is known as: ' + userName)
+    } else { // Send message to connected users
+      console.log(`${(new Date())} Received Message from ${userName} : ${jsonObj.value}`)
 
-        // broadcast message to all connected clients
-        var json = JSON.stringify({ type: 'message', data: obj })
-        for (var i = 0; i < clients.length; i++) {
-          clients[i].sendUTF(json)
-        }
+      // we want to keep history of all sent messages
+      var obj = {
+        time: (new Date()).getTime(),
+        text: jsonObj.value,
+        type: jsonObj.type,
+        author: userName
+      }
+
+      // broadcast message to all connected clients
+      var json = JSON.stringify({ type: obj.type, data: obj })
+
+      for (var i = 0; i < clients.length; i++) {
+        clients[i].sendUTF(json)
       }
     }
   })

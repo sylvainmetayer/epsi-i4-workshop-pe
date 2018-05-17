@@ -20,7 +20,7 @@ $(function () {
     var connection = new WebSocket('ws://127.0.0.1:1337');
 
     connection.onopen = function () {
-        connection.send("Poste de controle");
+        connection.send(JSON.stringify({ type: "name", value: "Poste de contrôle" }));
     };
 
     connection.onerror = function (error) {
@@ -39,10 +39,14 @@ $(function () {
             return;
         }
 
-        // NOTE: if you're not sure about the JSON structure
-        // check the server source code above
+        console.log(json)
+
         if (json.type === 'message') { // it's a single message
-            addMessage(json.data.author, json.data.text, new Date(json.data.time));
+            logMessage(json.data.author, json.data.text, new Date(json.data.time));
+        } else if (json.type == "angry") {
+            console.log('TODO angry')
+        } else if (json.type == "lost") {
+            console.log("TODO lost")
         } else {
             console.log('Hmm..., I\'ve never seen JSON like this: ', json);
         }
@@ -53,16 +57,14 @@ $(function () {
      * in 3 seconds then show some error message to notify the user that
      * something is wrong.
      */
-    setInterval(function () {
+    var timerId = setInterval(function () {
         if (connection.readyState !== 1) {
             content.prepend($('<li>', { text: 'Unable to communicate with the WebSocket server.' }));
+            clearInterval(timerId);
         }
     }, 5000);
 
-    /**
-     * Add message to the chat window
-     */
-    function addMessage(author, message, dt) {
+    function logMessage(author, message, dt) {
         content.prepend('<li>' + author + ' @ ' +
             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
             + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())

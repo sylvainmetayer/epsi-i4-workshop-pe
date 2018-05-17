@@ -12,7 +12,7 @@ $(function () {
     var connection = new WebSocket('ws://127.0.0.1:1337');
 
     connection.onopen = function () {
-        connection.send("Borne 1");
+        connection.send(JSON.stringify({ type: "name", value: "Borne 1" }));
     };
 
     connection.onerror = function (error) {
