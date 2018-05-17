@@ -1,0 +1,34 @@
+{
+  "name": "epsi-i4-workshop-pe",
+  "version": "1.0.0",
+  "description": "Workshop Pôle Emploi EPSI",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "npx nodemon app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylvainmetayer/epsi-i4-workshop-pe.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sylvainmetayer/epsi-i4-workshop-pe/issues"
+  },
+  "homepage": "https://github.com/sylvainmetayer/epsi-i4-workshop-pe#readme",
+  "dependencies": {
+    "nodemon": "^1.17.4",
+    "websocket": "^1.0.26"
+  },
+  "standard": {
+    "ignore": [
+      "pe-js/*",
+      "js/*",
+      "models/*"
+    ]
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  }
+}
